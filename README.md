@@ -12,3 +12,8 @@ Intended features:
 Meant mostly for my personal use, but flexible enough to reuse across multiple projects.
 
 Explore what's available at: https://lt-ui.netlify.app
+
+This repository is available at:
+
+- https://git.sr.ht/~luketurner/lt-ui
+- https://github.com/luketurner/lt-ui

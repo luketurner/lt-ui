@@ -1,0 +1,19 @@
+{
+  "name": "lt-ui",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "shadow-cljs watch devcards",
+    "build": "shadow-cljs release devcards"
+  },
+  "devDependencies": {
+    "shadow-cljs": "2.11.23",
+    "marked": "^0.7.0",
+    "highlight.js": "^10.6.0",
+    "react": "16.13.0"
+  },
+  "dependencies": {
+    "create-react-class": "15.6.3",
+    "react-dom": "17.0.1"
+  }
+}

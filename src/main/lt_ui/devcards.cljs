@@ -1,15 +1,21 @@
 (ns lt-ui.devcards
-  (:require [devcards.core :refer [defcard reagent]]
-            [reagent.core :as reagent]))
+  (:require [devcards.core :refer [start-devcard-ui! reagent]]
+            [reagent.core :as r]))
 
-(def styles (reagent/atom ""))
+(def styles (r/atom ""))
 
-(defn defcard' [el]
-  (defcard (reagent [:<>
-                     [:style @styles]
-                     el])))
+(defn styled-reagent [el-or-fn]
+  (reagent
+   (fn [data-atom owner]
+     [:<>
+      [:style @styles]
+      (if (fn? el-or-fn)
+        (el-or-fn data-atom owner)
+        el-or-fn)])))
 
 (defn init! []
-  (devcards.core/start-devcard-ui!)
+  (start-devcard-ui!)
   (println "Deleting com-rigsomelight-devcards-addons-css element...")
-  (.remove (js/document.getElementById "com-rigsomelight-devcards-addons-css")))
+  (when (js/document.getElementById "com-rigsomelight-devcards-addons-css")
+    (.remove (js/document.getElementById "com-rigsomelight-devcards-addons-css"))))
+

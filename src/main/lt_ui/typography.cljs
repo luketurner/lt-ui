@@ -1,7 +1,7 @@
 (ns lt-ui.typography
   (:require [garden.units :refer [rem px percent em]]
             [garden.selectors :refer [descendant]]
-            [lt-ui.devcards :refer [defcard']]))
+            [lt-ui.devcards :refer-macros [defcard']]))
 
 (defn rules
   "Defines rules for typography. They boil down to:
@@ -28,7 +28,7 @@
      [:p :ul :ol :dl :pre :table :blockquote {:margin-top 0 :margin-bottom (rem lh)}]
      [(descendant :ul :ul) (descendant :ul :ol) (descendant :ol :ul) (descendant :ol :ol) {:margin-top 0 :margin-bottom 0}]
      [:hr {:border "1px solid" :margin "-1px 0"}]
-     [:a :b :i :strong :em :small :code {:line-height 0}]
+     [:a :b :i :strong :em :small :code {:line-height :inherit}]
      [:sub :sup {:line-height 0 :position :relative :vertical-align :baseline}]
      [:sup {:top (em -0.5)}]
      [:sub {:bottom (em -0.25)}]

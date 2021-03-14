@@ -3,7 +3,9 @@
             [garden.core :refer [css]]
             [lt-ui.typography :as typography]
             [lt-ui.containers :as containers]
-            [lt-ui.devcards :as devcards]))
+            [lt-ui.devcards :as devcards]
+            [lt-ui.inputs]
+            [lt-ui.forms]))
 
 (defn theme-rules [theme]
   (concat [[:* {:box-sizing :border-box}]]

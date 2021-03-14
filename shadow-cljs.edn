@@ -11,6 +11,7 @@
 
  :builds
  {:devcards {:target :browser
+             :devtools {:after-load lt-ui.core/init}
              :modules {:main {:init-fn lt-ui.core/init}}
              :compiler-options {:devcards true}
              :build-options {:ns-aliases {devcards-marked cljsjs.marked

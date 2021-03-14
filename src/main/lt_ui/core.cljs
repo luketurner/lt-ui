@@ -2,11 +2,13 @@
   (:require [reagent.core]
             [garden.core :refer [css]]
             [lt-ui.typography :as typography]
+            [lt-ui.containers :as containers]
             [lt-ui.devcards :as devcards]))
 
 (defn theme-rules [theme]
-  (concat []
-          (typography/rules theme)))
+  (concat [[:* {:box-sizing :border-box}]]
+          (typography/rules theme)
+          (containers/rules theme)))
 
 (defn init []
   (devcards/init!)

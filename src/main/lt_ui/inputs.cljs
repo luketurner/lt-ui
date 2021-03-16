@@ -1,5 +1,4 @@
-(ns lt-ui.inputs
-  (:require [lt-ui.devcards :refer-macros [defcard']]))
+(ns lt-ui.inputs)
 
 (defn input [{:keys [type options value on-change] :as opts}]
   (let [on-change #(-> % (.-target) (.-value) (on-change))
@@ -19,10 +18,3 @@
    (merge opts
           {:value (get-in data path)
            :on-change #(on-change (assoc-in data path %))})))
-
-(defcard' text-input
-  ""
-  (fn [data-atom _]
-    [text (cursor @data-atom #(reset! data-atom %) [:value])])
-  {:value nil :error nil}
-  {:inspect-data true})

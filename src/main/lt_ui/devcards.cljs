@@ -1,14 +1,19 @@
 (ns lt-ui.devcards
   (:require [devcards.core :refer [start-devcard-ui! reagent]]
-            [reagent.core :as r]))
+            [reagent.core :as r]
+            [lt-ui.core :refer [themed-stylesheet]]))
 
-(def styles (r/atom ""))
+(def default-theme {:font-size 16
+                    :line-height 1.4
+                    :scale-factor 1.5})
+
+(def theme (r/atom default-theme))
 
 (defn styled-reagent [el-or-fn]
   (reagent
    (fn [data-atom owner]
      [:<>
-      [:style @styles]
+      [themed-stylesheet @theme]
       (if (fn? el-or-fn)
         (el-or-fn data-atom owner)
         el-or-fn)])))

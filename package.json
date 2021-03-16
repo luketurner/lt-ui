@@ -3,8 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "shadow-cljs watch devcards",
-    "build": "shadow-cljs release devcards"
+    "docs:start": "shadow-cljs watch docs",
+    "docs:build": "shadow-cljs release docs"
   },
   "devDependencies": {
     "shadow-cljs": "2.11.23",

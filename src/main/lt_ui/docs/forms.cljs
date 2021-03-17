@@ -1,14 +1,33 @@
 (ns lt-ui.docs.forms
   (:require [lt-ui.devcards :refer-macros [defcard']]
             [lt-ui.forms :as forms]
-            [lt-ui.inputs :as inputs]))
+            [lt-ui.inputs :as inputs]
+            [clojure.string :as string]))
 
 (defcard' form-group
-  "Use `forms/group` to add labels to your inputs."
+  "Use the `forms/group` function to organize inputs into a traditional form layout.
+   
+   Form groups expect a :label, which in this example is a string, but could also be a Hiccup form.
+   They also expect a vector of Hiccup forms in the :inputs prop. The specified inputs will be
+   rendered on top of each other alongside the label."
   (fn [data-atom]
     [forms/group {:label "Username"
-            :inputs [[inputs/text (lt-ui.inputs/cursor @data-atom
+                  :inputs [[inputs/text (lt-ui.inputs/cursor @data-atom
                                                              #(reset! data-atom %)
                                                              [:username])]]}])
+  {:username nil}
+  {:inspect-data true})
+
+(defcard' form-group-validation
+  "The `group` component sets an `on-error` handler for its :inputs. Input errors are rendered below the label.
+   
+   In this case, strings that contain a `q` are considered valid."
+  (fn [data-atom]
+    [forms/group {:label "Username"
+                  :inputs [[inputs/text (lt-ui.inputs/cursor @data-atom
+                                                             #(reset! data-atom %)
+                                                             [:username]
+                                                             {:validator #(string/includes? % "q")
+                                                              :show-error #(str "Must contain q")})]]}])
   {:username nil}
   {:inspect-data true})

@@ -15,11 +15,11 @@ tasks:
       cd lt-ui
       npm i --no-progress
       npm i netlify-cli --quiet --no-progress
-  - build-js: |
+  - build-docs: |
       cd lt-ui
-      npm run build
+      npm run docs:build
       rm public/js/manifest.edn
-  - deploy: |
+  - deploy-docs: |
       set +x
       source ~/netlify_config
       cd lt-ui

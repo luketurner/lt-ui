@@ -17,3 +17,11 @@ This repository is available at:
 
 - https://git.sr.ht/~luketurner/lt-ui
 - https://github.com/luketurner/lt-ui
+
+## Credit/Inspiration
+
+- Gridlover (https://gridlover.net)
+- Smol CSS (https://smolcss.dev/)
+- BlueprintJS (https://blueprintjs.com/)
+- Tailwind CSS (https://tailwindcss.com/)
+

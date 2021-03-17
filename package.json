@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "build": "lein deploy local",
     "docs:start": "shadow-cljs watch docs",
     "docs:build": "shadow-cljs release docs"
   },

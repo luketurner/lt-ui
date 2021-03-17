@@ -4,14 +4,14 @@
 
 an experimental CSS framework in ClojureScript
 
+**Check out the [interactive documentation](https://lt-ui.netlify.app)**
+
 Intended features:
 
 - Theme-able CSS framework (containers, typography, etc.)
 - Library of Reagent components for interactive Web pages (menus, forms, etc.)
 
-Meant mostly for my personal use, but flexible enough to reuse across multiple projects.
-
-Explore what's available at: https://lt-ui.netlify.app
+Meant for my personal use, to be flexible for reuse across multiple projects.
 
 This repository is available at:
 
@@ -25,3 +25,17 @@ This repository is available at:
 - BlueprintJS (https://blueprintjs.com/)
 - Tailwind CSS (https://tailwindcss.com/)
 
+## Development
+
+To run the devcards interface:
+
+```
+npm install
+npm run docs:start
+```
+
+To build a JAR (Requires Leiningen):
+
+```
+npm run build
+```

@@ -9,7 +9,8 @@
 (defn theme-rules [theme]
   (concat [[:* {:box-sizing :border-box}]]
           (typography/rules theme)
-          (containers/rules theme)))
+          (containers/rules theme)
+          (inputs/css-rules theme)))
 
 (defn themed-stylesheet [theme]
   [:style (css (theme-rules theme))])

@@ -1,4 +1,4 @@
-(ns lt-ui.devcards
+(ns lt-ui.docs.devcards
   (:require [devcards.core :refer [defcard]]
             [reagent.core :as reagent]
             [zprint.core :refer [zprint-str]]))

@@ -1,5 +1,5 @@
 (ns lt-ui.docs.containers
-  (:require [lt-ui.devcards :refer-macros [defcard']]))
+  (:require [lt-ui.docs.devcards :refer-macros [defcard']]))
 
 (defcard' application-container-overview
   "The `.application` class provides a top-level container with conventional Web application layouts.

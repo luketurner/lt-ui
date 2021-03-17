@@ -1,5 +1,5 @@
 (ns lt-ui.docs.typography
-  (:require [lt-ui.devcards :refer-macros [defcard']]))
+  (:require [lt-ui.docs.devcards :refer-macros [defcard']]))
 
 (defcard' [:h1 "Heading One"])
 (defcard' [:h2 "Heading Two"])

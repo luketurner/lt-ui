@@ -1,5 +1,5 @@
 (ns lt-ui.docs.forms
-  (:require [lt-ui.devcards :refer-macros [defcard']]
+  (:require [lt-ui.docs.devcards :refer-macros [defcard']]
             [lt-ui.forms :as forms]
             [lt-ui.inputs :as inputs]
             [clojure.string :as string]))

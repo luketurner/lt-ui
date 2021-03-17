@@ -1,6 +1,7 @@
 ;; shadow-cljs configuration
 {:source-paths
- ["src/main"]
+ ["src/main"
+  "src/dev"]
 
  :dependencies
  [[garden "1.3.10"]

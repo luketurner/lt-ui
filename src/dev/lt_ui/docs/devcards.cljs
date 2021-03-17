@@ -1,4 +1,4 @@
-(ns lt-ui.devcards
+(ns lt-ui.docs.devcards
   (:require [devcards.core :refer [start-devcard-ui! reagent]]
             [reagent.core :as r]
             [lt-ui.core :refer [themed-stylesheet]]))

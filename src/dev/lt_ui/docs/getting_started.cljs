@@ -4,16 +4,21 @@
 (defcard
   "# Installation
    
-   Since this framework is currently under development for personal use, it's not
-   published to Clojars.
+   This framework is currently under development for personal use. It is not production-ready
+   and the installation mechanism is not secure (as you can see for yourself.)
    
-   In the meantime, the following suffices to reference the project locally:
+   **Unless you're me, don't follow these instructions!**
+
+   Okay, you're me? Everyone else is gone? Great.
+   
+   You can use this unsafely by adding a custom repository to your project's dependency file:
    
    ``` bash
-   git clone https://git.sr.ht/~luketurner/lt-ui
-   cd lt-ui
-   lein deploy local # deploys to ~/.m2
+   :repositories {\"ltui\" {:url \"https://raw.githubusercontent.com/luketurner/lt-ui/master/dist\"
+                          :checksum :warn}}
    ```
+
+   (The `:checksum :warn` thing is necessary due to the way Git turns my CRLFs into LFs... I think.)
    
    Then reference in your project with:
    

@@ -8,7 +8,6 @@ public/js
 pom.xml
 pom.xml.asc
 *.iml
-*.jar
 *.log
 .shadow-cljs
 .idea

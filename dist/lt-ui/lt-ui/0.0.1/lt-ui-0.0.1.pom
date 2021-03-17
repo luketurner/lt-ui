@@ -13,7 +13,7 @@
     </license>
   </licenses>
   <scm>
-    <tag>c5c209387f6b8be40aa7455d207ed4dcf8e9f743</tag>
+    <tag>359cba8c09d61f2cb327f99614fc3128fe296cfe</tag>
   </scm>
   <build>
     <sourceDirectory>src\main</sourceDirectory>
@@ -73,16 +73,6 @@
       <groupId>reagent</groupId>
       <artifactId>reagent</artifactId>
       <version>1.0.0</version>
-    </dependency>
-    <dependency>
-      <groupId>devcards</groupId>
-      <artifactId>devcards</artifactId>
-      <version>0.2.7</version>
-    </dependency>
-    <dependency>
-      <groupId>zprint</groupId>
-      <artifactId>zprint</artifactId>
-      <version>1.1.1</version>
     </dependency>
   </dependencies>
 </project>

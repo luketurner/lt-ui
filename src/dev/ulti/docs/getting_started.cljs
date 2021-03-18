@@ -4,26 +4,14 @@
 (defcard
   "# Installation
    
-   This framework is currently under development for personal use. It is not production-ready
-   and the installation mechanism is not secure (as you can see for yourself.)
-   
-   **Unless you're me, don't follow these instructions!**
+   **Warning**: This project is under active development, and versions are provided with no
+   guarantees of stability or durability. (In other words, I'm not ready to commit to semver
+   for this project yet.)
 
-   Okay, you're me? Everyone else is gone? Great.
-   
-   You can use this unsafely by adding a custom repository to your project's dependency file:
-   
-   ``` bash
-   :repositories {\"ltui\" {:url \"https://raw.githubusercontent.com/luketurner/ulti/master/dist\"
-                          :checksum :warn}}
-   ```
-
-   (The `:checksum :warn` thing is necessary due to the way Git turns my CRLFs into LFs... I think.)
-   
-   Then reference in your project with:
+   Add the following to your project dependencies:
    
    ```clojure
-   [ulti \"0.0.1\"]
+   [lt/ulti \"1.0.0-SNAPSHOT\"]
    ```")
 
 (defcard
@@ -45,3 +33,32 @@
    
    This renders a `<style>` block with dynamically generated CSS. If you store the theme
    in a Reagent atom, the stylesheet will reactively update when the theme changes.")
+
+(defcard
+  "# Installing from Source
+   
+   This section convers installing `ulti` locally. This is only necessary if you want to edit
+   the `ulti` source code.
+
+   Requirements:
+
+   - node
+   - npm
+   - git
+   - leiningen
+
+   Setup:
+
+   ``` bash
+   git clone https://git.sr.ht/~luketurner/ulti
+   cd ulti
+   npm i
+   ```
+
+   Scripts for local development:
+
+   ``` bash
+   npm run library:local # publishes library to ~/.m2
+   npm run docs:start    # launches docs
+   npm run docs:build    # builds docs into ./public
+   ```")

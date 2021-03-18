@@ -1,5 +1,6 @@
 (ns ulti.inputs
-  (:require [reagent.core :as reagent]))
+  (:require [reagent.core :as reagent])
+  (:refer-clojure :exclude [time]))
 
 (defn css-rules [theme]
   [[:.invalid-input {:border-color "red"}]])
@@ -40,8 +41,31 @@
                                        [:option {:value (:value o)} (:label o)]))
         [:input opts]))))
 
-(defn text [opts]
-  [input (assoc opts :type :text)])
+;; Functions for all the <input> types
+(defn checkbox [opts] [input (assoc opts :type :checkbox)])
+(defn color [opts] [input (assoc opts :type :color)])
+(defn date [opts] [input (assoc opts :type :date)])
+(defn datetime-local [opts] [input (assoc opts :type :datetime-local)])
+(defn email [opts] [input (assoc opts :type :email)])
+(defn file [opts] [input (assoc opts :type :file)])
+(defn month [opts] [input (assoc opts :type :month)])
+(defn number [opts] [input (assoc opts :type :number)])
+(defn password [opts] [input (assoc opts :type :password)])
+(defn radio [opts] [input (assoc opts :type :radio)]) ; TODO
+(defn numeric-range [opts] [input (assoc opts :type :range)])
+(defn search [opts] [input (assoc opts :type :search)]) ; TODO?
+(defn tel [opts] [input (assoc opts :type :tel)])
+(defn text [opts] [input (assoc opts :type :text)])
+(defn time [opts] [input (assoc opts :type :time)])
+(defn url [opts] [input (assoc opts :type :url)])
+(defn week [opts] [input (assoc opts :type :week)])
+
+;; functions for custom input types
+(defn select [opts] [input (assoc opts :type :select)])
+(defn textarea [opts] [input (assoc opts :type :textarea)])
+
+
+
 
 (defn cursor
   ([data on-change path] (cursor data on-change path {}))

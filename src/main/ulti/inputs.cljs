@@ -65,8 +65,6 @@
 (defn textarea [opts] [input (assoc opts :type :textarea)])
 
 
-
-
 (defn cursor
   ([data on-change path] (cursor data on-change path {}))
   ([data on-change path opts]

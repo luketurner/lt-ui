@@ -200,3 +200,25 @@
                                  :on-error on-error})]))
   {:value nil :error nil}
   {:inspect-data true})
+
+(defcard' select-input
+  "An example of a `select`:"
+  (fn [data-atom]
+    (let [data @data-atom
+          on-change (fn [data] (reset! data-atom data))]
+      [inputs/select {:value data
+                      :on-change on-change
+                      :options [{:value "foo" :label "Foo label"}
+                                {:value "bar" :label "Bar label"}]}]))
+  nil
+  {:inspect-data true})
+
+(defcard' textarea-input
+  "An example of a `textarea`:"
+  (fn [data-atom]
+    (let [data @data-atom
+          on-change (fn [data] (reset! data-atom data))]
+      [inputs/textarea {:value data
+                        :on-change on-change}]))
+  nil
+  {:inspect-data true})

@@ -17,7 +17,24 @@
       [(s/> :footer) {:grid-area :footer}]
       [(s/> :header) {:grid-area :header}]
       [(s/> :main) {:grid-area :main}]]
+     [:.centered {:display :grid :place-content :center}]
      [:.utility-application-demo {:min-height (px 300)}]
      [:.utility-fill-color {:background-color "rgba(150, 200, 255, 0.5)" :width "100%" :height "100%"}]]))
 
-(defn application [{:keys []}])
+(defn application [props & children]
+  (let [props? (map? props)
+        children (if props? children (into [props] children))
+        props (if props? props {})
+        {:keys [sidebar-left sidebar-right header footer]} props]
+    [:div.application props ; TODO -- filter props
+     [:header header]
+     [:div.sidebar-left sidebar-left]
+     (into [:main] children)
+     [:div.sidebar-right sidebar-right]
+     [:footer footer]]))
+
+(defn router [{:keys [views value]}]
+  (get views value))
+
+(defn centered [& children]
+  (into [:div.centered] children))

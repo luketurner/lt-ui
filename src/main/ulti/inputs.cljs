@@ -1,4 +1,4 @@
-(ns lt-ui.inputs
+(ns ulti.inputs
   (:require [reagent.core :as reagent]))
 
 (defn css-rules [theme]

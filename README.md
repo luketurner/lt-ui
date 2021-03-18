@@ -1,10 +1,10 @@
-# lt-ui
+# ulti
 
 > **Warning:** WIP
 
 an experimental CSS framework in ClojureScript
 
-**Check out the [interactive documentation](https://lt-ui.netlify.app)**
+**Check out the [interactive documentation](https://ulti.netlify.app)**
 
 Intended features:
 
@@ -15,8 +15,8 @@ Meant for my personal use, to be flexible for reuse across multiple projects.
 
 This repository is available at:
 
-- https://git.sr.ht/~luketurner/lt-ui
-- https://github.com/luketurner/lt-ui
+- https://git.sr.ht/~luketurner/ulti
+- https://github.com/luketurner/ulti
 
 ## Credit/Inspiration
 

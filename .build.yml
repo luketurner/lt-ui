@@ -4,7 +4,7 @@ packages:
   - nodejs
   - npm
 sources:
-  - https://git.sr.ht/~luketurner/lt-ui
+  - https://git.sr.ht/~luketurner/ulti
 secrets:
   # ~/netlify_config -- expected to have:
   #   NETLIFY_SITE_ID
@@ -12,16 +12,16 @@ secrets:
   - df13cd45-3938-4807-a0de-0087a64d8c1d
 tasks:
   - install-node-modules: |
-      cd lt-ui
+      cd ulti
       npm i --no-progress
       npm i netlify-cli --quiet --no-progress
   - build-docs: |
-      cd lt-ui
+      cd ulti
       npm run docs:build
       rm public/js/manifest.edn
   - deploy-docs: |
       set +x
       source ~/netlify_config
-      cd lt-ui
+      cd ulti
       node_modules/.bin/netlify deploy --site="$NETLIFY_SITE_ID" --dir=public --prod >/dev/null 2>&1
       set -x

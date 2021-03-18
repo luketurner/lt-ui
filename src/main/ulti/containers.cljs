@@ -1,4 +1,4 @@
-(ns lt-ui.containers
+(ns ulti.containers
   (:require [garden.selectors :as s]
             [garden.units :refer [vh vw rem px]]))
 
@@ -19,3 +19,5 @@
       [(s/> :main) {:grid-area :main}]]
      [:.utility-application-demo {:min-height (px 300)}]
      [:.utility-fill-color {:background-color "rgba(150, 200, 255, 0.5)" :width "100%" :height "100%"}]]))
+
+(defn application [{:keys []}])

@@ -1,4 +1,4 @@
-(ns lt-ui.typography
+(ns ulti.typography
   (:require [garden.units :refer [rem px percent em]]
             [garden.selectors :refer [descendant]]))
 

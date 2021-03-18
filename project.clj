@@ -1,7 +1,7 @@
 ;; Only used for publishing JARs -- use shadow-cljs to build clojurescript
-(defproject lt-ui "0.0.1"
+(defproject ulti "0.0.1"
   :description "an experimental web UI framework"
-  :url "https://git.sr.ht/~luketurner/lt-ui"
+  :url "https://git.sr.ht/~luketurner/ulti"
   :license {:name "MIT License"}
 
   :dependencies

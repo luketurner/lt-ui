@@ -13,8 +13,8 @@
 
  :builds
  {:docs {:target :browser
-         :devtools {:after-load lt-ui.docs.core/init!}
-         :modules {:main {:init-fn lt-ui.docs.core/init!}}
+         :devtools {:after-load ulti.docs.core/init!}
+         :modules {:main {:init-fn ulti.docs.core/init!}}
          :compiler-options {:devcards true}
          :build-options {:ns-aliases {devcards-marked cljsjs.marked
                                       devcards-syntax-highlighter cljsjs.highlight}}}}}

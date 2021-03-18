@@ -1,4 +1,4 @@
-(ns lt-ui.forms
+(ns ulti.forms
   (:require [reagent.core :as reagent]))
 
 (defn group [{:keys [inputs label]}]

@@ -1,10 +1,10 @@
-(ns lt-ui.core
+(ns ulti.core
   (:require [reagent.core]
             [garden.core :refer [css]]
-            [lt-ui.typography :as typography]
-            [lt-ui.containers :as containers]
-            [lt-ui.inputs :as inputs]
-            [lt-ui.forms :as forms]))
+            [ulti.typography :as typography]
+            [ulti.containers :as containers]
+            [ulti.inputs :as inputs]
+            [ulti.forms :as forms]))
 
 (defn theme-rules [theme]
   (concat [[:* {:box-sizing :border-box}]]

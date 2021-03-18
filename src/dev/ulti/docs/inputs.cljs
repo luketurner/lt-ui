@@ -1,13 +1,13 @@
-(ns lt-ui.docs.inputs
-  (:require [lt-ui.docs.devcards :refer-macros [defcard']]
+(ns ulti.docs.inputs
+  (:require [ulti.docs.devcards :refer-macros [defcard']]
             [devcards.core :refer [defcard]]
-            [lt-ui.inputs :as inputs]
+            [ulti.inputs :as inputs]
             [clojure.string :as string]))
 
 (defcard overview
   "### Overview
    
-   The `lt-ui.inputs` namespace provides a suite of React components that
+   The `ulti.inputs` namespace provides a suite of React components that
    provide some advanced functionality on top of bare `<input>` elements.
    
    Basic usage of input components is to specify `value` and `on-change` props,
@@ -20,7 +20,7 @@
    Usually, the inputs namespace should be imported with `:as`, for example:
 
    ``` clojure
-   (require '[lt-ui.inputs :as inputs])
+   (require '[ulti.inputs :as inputs])
    ```
 
    A simple usage example:
@@ -65,7 +65,7 @@
    A more realistic example of `value` and `on-change` using `re-frame` would be something like this:
 
    ``` clojure
-   (require '[lt-ui.inputs :as inputs])
+   (require '[ulti.inputs :as inputs])
    (require '[re-frame.core :refer [subscribe dispatch]])
 
    [inputs/text {:value @(subscribe [:my-data])

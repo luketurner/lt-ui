@@ -1,7 +1,7 @@
-(ns lt-ui.docs.devcards
+(ns ulti.docs.devcards
   (:require [devcards.core :refer [start-devcard-ui! reagent]]
             [reagent.core :as r]
-            [lt-ui.core :refer [themed-stylesheet]]))
+            [ulti.core :refer [themed-stylesheet]]))
 
 (def default-theme {:font-size 16
                     :line-height 1.4

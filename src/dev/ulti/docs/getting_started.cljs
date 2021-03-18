@@ -1,4 +1,4 @@
-(ns lt-ui.docs.getting-started
+(ns ulti.docs.getting-started
   (:require [devcards.core :refer [defcard]]))
 
 (defcard
@@ -14,7 +14,7 @@
    You can use this unsafely by adding a custom repository to your project's dependency file:
    
    ``` bash
-   :repositories {\"ltui\" {:url \"https://raw.githubusercontent.com/luketurner/lt-ui/master/dist\"
+   :repositories {\"ltui\" {:url \"https://raw.githubusercontent.com/luketurner/ulti/master/dist\"
                           :checksum :warn}}
    ```
 
@@ -23,7 +23,7 @@
    Then reference in your project with:
    
    ```clojure
-   [lt-ui \"0.0.1\"]
+   [ulti \"0.0.1\"]
    ```")
 
 (defcard
@@ -34,7 +34,7 @@
    `themed-stylesheet` component that you should insert into your app:
    
    ``` clojure
-   (require '[lt-ui.core :refer [themed-stylesheet]])
+   (require '[ulti.core :refer [themed-stylesheet]])
 
    (defn app []
      [:<>

@@ -1,7 +1,7 @@
-(ns lt-ui.docs.forms
-  (:require [lt-ui.docs.devcards :refer-macros [defcard']]
-            [lt-ui.forms :as forms]
-            [lt-ui.inputs :as inputs]
+(ns ulti.docs.forms
+  (:require [ulti.docs.devcards :refer-macros [defcard']]
+            [ulti.forms :as forms]
+            [ulti.inputs :as inputs]
             [clojure.string :as string]))
 
 (defcard' form-group
@@ -12,7 +12,7 @@
    rendered on top of each other alongside the label."
   (fn [data-atom]
     [forms/group {:label "Username"
-                  :inputs [[inputs/text (lt-ui.inputs/cursor @data-atom
+                  :inputs [[inputs/text (ulti.inputs/cursor @data-atom
                                                              #(reset! data-atom %)
                                                              [:username])]]}])
   {:username nil}
@@ -24,7 +24,7 @@
    In this case, strings that contain a `q` are considered valid."
   (fn [data-atom]
     [forms/group {:label "Username"
-                  :inputs [[inputs/text (lt-ui.inputs/cursor @data-atom
+                  :inputs [[inputs/text (ulti.inputs/cursor @data-atom
                                                              #(reset! data-atom %)
                                                              [:username]
                                                              {:validator #(string/includes? % "q")

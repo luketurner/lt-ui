@@ -63,3 +63,15 @@
   "A container that centers its content."
   [containers/centered
    [:button "This button is centered"]])
+
+(defcard' vertical-split
+  "A container that puts its children side-by-side, splitting the available space between them."
+  [containers/vertical-split
+   [:p "This is left"]
+   [:p "This is right"]])
+
+(defcard' horizontal-split
+  "A container that stacks its children atop each other, splitting the available space beween them."
+  [containers/horizontal-split
+   [:p "This is above"]
+   [:p "This is below"]])

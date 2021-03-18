@@ -18,6 +18,10 @@
       [(s/> :header) {:grid-area :header}]
       [(s/> :main) {:grid-area :main}]]
      [:.centered {:display :grid :place-content :center}]
+     [:.vertical-split {:display :flex :flex-flow "row nowrap"}
+      [(s/> :*) {:flex-grow 1}]]
+     [:.horizontal-split {:display :flex :flex-flow "column nowrap"}
+      [(s/> :*) {:flex-grow 1}]]
      [:.utility-application-demo {:min-height (px 300)}]
      [:.utility-fill-color {:background-color "rgba(150, 200, 255, 0.5)" :width "100%" :height "100%"}]]))
 
@@ -38,3 +42,9 @@
 
 (defn centered [& children]
   (into [:div.centered] children))
+
+(defn vertical-split [& children]
+  (into [:div.vertical-split] children))
+
+(defn horizontal-split [& children]
+  (into [:div.horizontal-split] children))

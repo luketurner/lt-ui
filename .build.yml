@@ -3,6 +3,7 @@ packages:
   - openjdk8
   - nodejs
   - npm
+  - leiningen
 sources:
   - https://git.sr.ht/~luketurner/ulti
 secrets:
@@ -10,6 +11,10 @@ secrets:
   #   NETLIFY_SITE_ID
   #   export NETLIFY_AUTH_TOKEN
   - df13cd45-3938-4807-a0de-0087a64d8c1d
+  # ~/clojars_config -- expected to have:
+  #   export CLOJARS_USERNAME
+  #   export CLOJARS_PASSWORD
+  - b272a716-eed3-4c2a-96b6-8b4d903a18ab
 tasks:
   - install-node-modules: |
       cd ulti
@@ -25,3 +30,9 @@ tasks:
       cd ulti
       node_modules/.bin/netlify deploy --site="$NETLIFY_SITE_ID" --dir=public --prod >/dev/null 2>&1
       set -x
+  - publish-library: |
+      set +x
+      source ~/clojars_config
+      set -x
+      cd ulti
+      npm run library:publish

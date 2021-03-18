@@ -4,7 +4,7 @@
 
 an experimental CSS framework in ClojureScript
 
-**Check out the [interactive documentation](https://ulti.netlify.app)**
+**Check out the [interactive documentation](https://lt-ui.netlify.app)**
 
 Intended features:
 

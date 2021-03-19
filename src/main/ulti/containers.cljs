@@ -3,7 +3,7 @@
             [garden.units :refer [vh vw rem px]]
             [reagent.core :as reagent]))
 
-(defn rules [{:keys [line-height font-size]}]
+(defn rules [{:keys [line-height font-size colors]}]
   (let [m-px (-> line-height (* font-size) (js/Math.floor))]
     [[:.application {:min-height (vh 100)
                      :width "100%"
@@ -23,9 +23,16 @@
       [(s/> :*) {:flex-grow 1}]]
      [:.horizontal-split {:display :flex :flex-flow "column nowrap"}
       [(s/> :*) {:flex-grow 1}]]
+     [:.paper {:background-color :white
+               :box-shadow ["0px 2px 1px -1px rgba(0, 0, 0, 0.2)" ; based on md box shadow
+                            "0px 1px 1px 0px rgba(0, 0, 0, 0.14)"
+                            "0px 1px 3px 0px rgba(0,0,0,.12)"]
+               :padding (px m-px)
+               :border-radius "5px"}
+      [(s/> (s/last-child)) {:margin-bottom "0px"}]]
      [:.popover-container {:position :relative}]
      [:.popover-handle {:cursor :pointer}]
-     [:.popover-content {:position :absolute :background-color :white :border "1px solid gray" :padding "5px" :border-radius "5px"}]
+     [:.popover-content {:position :absolute}]
      [:.utility-application-demo {:min-height (px 300)}]
      [:.utility-fill-color {:background-color "rgba(150, 200, 255, 0.5)" :width "100%" :height "100%"}]]))
 
@@ -53,12 +60,15 @@
 (defn horizontal-split [& children]
   (into [:div.horizontal-split] children))
 
+(defn paper [& children]
+  (into [:div.paper] children))
+
 (defn popover [{:keys [handle value on-change]} & children]
   (reagent/with-let [open? (reagent/atom false)
                      last-value (reagent/atom false)]
     (when (not= value @last-value) (reset! open? value) (reset! last-value value))
-    [:div.popover-container
-     [:div.popover-handle {:on-click #(do 
+    [:span.popover-container
+     [:span.popover-handle {:on-click #(do 
                                         (swap! open? not)
                                         (when (fn? on-change) (on-change @open?)))}
       handle]

@@ -194,10 +194,12 @@
           on-error (fn [err] (swap! data-atom assoc :error err))
           validator (fn [val] (string/includes? val "q"))
           show-error (fn [_] "Must include a 'q'")]
-     [inputs/text (inputs/cursor data on-change [:value]
-                                {:validator validator
-                                 :show-error show-error
-                                 :on-error on-error})]))
+      [:<>
+       [inputs/text (inputs/cursor data on-change [:value]
+                                   {:validator validator
+                                    :show-error show-error
+                                    :on-error on-error})]
+       [:button {:on-click #(swap! data-atom assoc :value "hi there q.q")} "external update"]]))
   {:value nil :error nil}
   {:inspect-data true})
 

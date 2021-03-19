@@ -9,34 +9,41 @@
               :or {validator #(identity true)
                    show-error #(str "Invalid value.")
                    on-error #(identity true)}}]
-  
-  ; initialize atoms for managing transient state that we don't want to expose to callers
-  (reagent/with-let [unsaved-value (reagent/atom nil)
-                     last-valid-value (reagent/atom nil)]
-                    
-    ; update our transient state atoms if the `value` is changed
-    (when (not= value @last-valid-value)
-      (reset! last-valid-value value)
-      (reset! unsaved-value value))
 
-    ; now that side effects are done, proceed with building the Reagent component
-    (let [value @unsaved-value
-          value-is-valid? (or (nil? value) (validator value))
+  ;; initialize atoms for managing state. Maintains two versions of the value:
+  ;;   internal-value-atom :: contains the current raw input (which may not be valid.)
+  ;;   external-value-atom :: contains the latest value that was valid and sent out with on-change
+  (reagent/with-let [internal-value-atom (reagent/atom nil)
+                     external-value-atom (reagent/atom nil)]
+
+    ;; if the caller specifies a different `value`, there was an external update --
+    ;; something other than this input has changed the backing value. So, we update
+    ;; our internal state to match.
+    ;; (this triggers the component to re-render)
+    (when (not= value @external-value-atom)
+      (reset! external-value-atom value)
+      (reset! internal-value-atom value))
+
+    ;; now that side effects are done, proceed with building the Reagent component
+    (let [internal-value @internal-value-atom
+          value-is-valid? (or (nil? internal-value) (validator internal-value))
           on-change #(let [v (-> % (.-target) (.-value))]
                        (if (validator v)
                          (do
+                           (reset! internal-value-atom v)
+                           (reset! external-value-atom v)
                            (on-change v)
                            (on-error nil))
                          (do
-                           (reset! unsaved-value v)
+                           (reset! internal-value-atom v)
                            (on-error (show-error v)))))
           opts (-> opts
                    (merge {:on-change on-change
-                           :value value
+                           :value internal-value
                            :class (str (when-not value-is-valid? "invalid-input"))})
                    (dissoc :validator :on-error :show-error))]
       (case type
-        :textarea [:textarea opts value]
+        :textarea [:textarea opts internal-value]
         :select (into [:select opts] (for [o options]
                                        [:option {:value (:value o)} (:label o)]))
         [:input opts]))))

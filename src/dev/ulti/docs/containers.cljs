@@ -75,3 +75,13 @@
   [containers/horizontal-split
    [:p "This is above"]
    [:p "This is below"]])
+
+(defcard' popover
+  "The `popover` container is for making some content pop up in a little frame
+   (e.g. for help text, search dialogs, etc.)
+   
+   The popover is toggled when the handle element (specified by the `handle` prop)
+   is clicked. It can also be externally controlled by specifying `on-change` and `value` props
+   (where the value is a boolean indicating whether the popover is open.)"
+  [containers/popover {:handle [:p "Click me"]}
+   [:p "This is a popover!"]])

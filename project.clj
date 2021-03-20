@@ -7,7 +7,9 @@
   :dependencies
   [[org.clojure/clojurescript "1.10.520" :scope "provided"]
    [garden "1.3.10"]
-   [reagent "1.0.0"]]
+   [reagent "1.0.0"]
+   [medley "1.3.0"]
+   [metosin/malli "0.3.0"]]
     
   :deploy-repositories [["local" {:url "file:///~/.m2"
                                   :sign-releases false}]

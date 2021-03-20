@@ -24,6 +24,7 @@ This repository is available at:
 - Smol CSS (https://smolcss.dev/)
 - BlueprintJS (https://blueprintjs.com/)
 - Tailwind CSS (https://tailwindcss.com/)
+- Material Design (https://material.io/)
 
 ## Development
 

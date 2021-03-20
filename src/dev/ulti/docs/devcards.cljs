@@ -3,20 +3,19 @@
             [reagent.core :as r]
             [ulti.core :refer [themed-stylesheet]]))
 
-(def default-theme {:font-size 16
-                    :line-height 1.4
-                    :scale-factor 1.5})
+(def docs-theme (r/atom {}))
 
-(def theme (r/atom default-theme))
-
-(defn styled-reagent [el-or-fn]
+(defn styled-reagent
+  ([el-or-fn]
+   (styled-reagent el-or-fn @docs-theme))
+  ([el-or-fn theme]
   (reagent
    (fn [data-atom owner]
      [:<>
-      [themed-stylesheet @theme]
+      [themed-stylesheet theme]
       (if (fn? el-or-fn)
         (el-or-fn data-atom owner)
-        el-or-fn)])))
+        el-or-fn)]))))
 
 (defn init! []
   (start-devcard-ui!)

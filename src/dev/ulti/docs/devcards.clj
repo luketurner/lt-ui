@@ -16,4 +16,6 @@
   ([vname doc main-obj initial-data]
    `(defcard ~vname ~(add-code-example doc main-obj) (styled-reagent ~main-obj) (reagent/atom ~initial-data)))
   ([vname doc main-obj initial-data opts]
-   `(defcard ~vname ~(add-code-example doc main-obj) (styled-reagent ~main-obj) (reagent/atom ~initial-data) ~opts)))
+   `(defcard ~vname ~(add-code-example doc main-obj) ~(if (:theme opts)
+                                                       `(styled-reagent ~main-obj ~(:theme opts))
+                                                       `(styled-reagent ~main-obj)) (reagent/atom ~initial-data) ~opts)))

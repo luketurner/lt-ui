@@ -1,9 +1,17 @@
 (ns ulti.inputs
-  (:require [reagent.core :as reagent])
+  (:require [reagent.core :as reagent]
+            [garden.units :refer [px]]
+            [garden.selectors :as s])
   (:refer-clojure :exclude [time]))
 
-(defn css-rules [theme]
-  [[:.invalid-input {:border-color "red"}]])
+(defn css-rules [{:keys [line-height font-size]}]
+  (let [m-px (-> line-height (* font-size) (js/Math.floor))]
+    [[:.invalid-input {:border-color "red"}]
+     [(s/> :.input-group :*) {:margin-left 0 :margin-right 0}]
+     [((s/> :.input-group :*) (s/not s/last-child)) {:border-right 0}]]))
+
+(defn group [opts & children]
+  (into [:div.input-group] (map #(update % 1 merge opts) children)))
 
 (defn input [{:keys [type options value on-change validator on-error show-error] :as opts
               :or {validator #(identity true)

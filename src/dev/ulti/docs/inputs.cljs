@@ -224,3 +224,18 @@
                         :on-change on-change}]))
   nil
   {:inspect-data true})
+
+(defcard' input-groups
+  "The `group` function will combine two inputs together. Accepts options which are forwarded
+   to all the inputs in the group -- e.g. if you pass `:on-error` as prop to the `group`,
+   all the inputs in the group will receive that `:on-error` prop as well."
+  (fn [data-atom]
+    (let [data @data-atom
+          on-change (fn [data] (reset! data-atom data))]
+      [inputs/group {}
+       [inputs/text (ulti.inputs/cursor data on-change
+                                        [:name :first])]
+       [inputs/text (ulti.inputs/cursor data on-change
+                                        [:name :last])]]))
+  {:name {}}
+  {:inspect-data true})

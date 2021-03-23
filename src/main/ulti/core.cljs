@@ -40,7 +40,8 @@
     (concat [[:* {:box-sizing :border-box}]]
             (typography/rules theme)
             (containers/rules theme)
-            (inputs/css-rules theme))))
+            (inputs/css-rules theme)
+            (forms/css-rules theme))))
 
 (defn themed-stylesheet [theme]
   [:style (css (theme-rules theme))])

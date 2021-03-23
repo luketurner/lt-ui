@@ -20,11 +20,11 @@ This repository is available at:
 
 ## Credit/Inspiration
 
-- Gridlover (https://gridlover.net)
-- Smol CSS (https://smolcss.dev/)
-- BlueprintJS (https://blueprintjs.com/)
-- Tailwind CSS (https://tailwindcss.com/)
-- Material Design (https://material.io/)
+- Gridlover https://gridlover.net
+- Smol CSS https://smolcss.dev/
+- BlueprintJS https://blueprintjs.com/
+- Tailwind CSS https://tailwindcss.com/
+- Material Design https://material.io/
 
 ## Development
 

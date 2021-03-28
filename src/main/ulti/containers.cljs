@@ -44,7 +44,8 @@
   (let [props? (map? props)
         children (if props? children (into [props] children))
         props (if props? props {})
-        {:keys [sidebar-left sidebar-right header footer]} props]
+        {:keys [sidebar-left sidebar-right header footer]} props
+        props (dissoc props :sidebar-left :sidebar-right :header :footer)]
     [:div.application props ; TODO -- filter props
      [:header header]
      [:div.sidebar-left sidebar-left]

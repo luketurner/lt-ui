@@ -15,7 +15,10 @@
    form's data structure. It also has the key `:submit` which contains a function that can be used to submit the form.
    
    Note that submit butttons are not added automatically -- you have to include one in your function's return value for the form to be submittable.
-   For example:"
+   In fact, you don't necessarily need to render a submit button at all, as long as the `submit` callback is called. As such, forms can be used
+   to encapsulate any kind of transient state.
+
+   A simple form example:"
   (fn [data-atom]
     (let [on-submit (fn [data] (reset! data-atom data))]
       [forms/form {:on-submit on-submit}

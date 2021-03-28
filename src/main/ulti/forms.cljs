@@ -20,3 +20,14 @@
      [:div.form-group
       [:label label] i
       [:div.form-group-error @error-message] is])))
+
+(defn form [{:keys [on-submit]
+             :or {on-submit #(identity true)}}
+            f]
+  (reagent/with-let [form-data (reagent/atom {})
+                     getter #(get-in @form-data %)
+                     setter-factory (fn [ks] #(swap! form-data assoc-in ks %))]
+    (f {:data form-data
+        :setter setter-factory
+        :getter getter
+        :submit #(on-submit @form-data)})))

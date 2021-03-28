@@ -5,6 +5,27 @@
             [ulti.containers :as containers]
             [clojure.string :as string]))
 
+(defcard' form
+  "The `form` component is used to encapsulate inputs into a form. The state of the inputs are tracked in a single combined data structure
+   which represents the last valid state of the form inputs. When the form is submitted, the passed-in `on-submit` function will
+   be called with the full data structure.
+   
+   Instead of accepting children, the form accepts a single function parameter that comes after the options. This function is expected to return
+   the form's children. The function receives a map parameter with keys `:data`, `:getter`, and `:setter` that can be used to interact with the
+   form's data structure. It also has the key `:submit` which contains a function that can be used to submit the form.
+   
+   Note that submit butttons are not added automatically -- you have to include one in your function's return value for the form to be submittable.
+   For example:"
+  (fn [data-atom]
+    (let [on-submit (fn [data] (reset! data-atom data))]
+      [forms/form {:on-submit on-submit}
+       (fn [{:keys [getter setter submit]}]
+         [:<>
+          [inputs/text {:value (getter [:foo]) :on-change (setter [:foo])}]
+          [:button {:on-click submit} "Submit"]])]))
+  {}
+  {:inspect-data true})
+
 (defcard' form-group
   "Use the `forms/group` function to organize inputs into a traditional form layout.
    
@@ -93,4 +114,17 @@
                               [inputs/text (ulti.inputs/cursor data on-change
                                                                [:name :last])]]]}]))
   {:name {}}
+  {:inspect-data true})
+
+(defcard' form-with-groups-example
+  "An example of using `form` and `group` together to provide a traditional form interface."
+  (fn [data-atom]
+    (let [on-submit (fn [data] (reset! data-atom data))]
+      [forms/form {:on-submit on-submit}
+       (fn [{:keys [getter setter submit]}]
+         [:<>
+          [forms/group {:label "Foo" :inputs [[inputs/text {:value (getter [:foo]) :on-change (setter [:foo])}]]}]
+          [forms/group {:label "Bar" :inputs [[inputs/text {:value (getter [:bar]) :on-change (setter [:bar])}]]}]
+          [:button {:on-click submit} "Submit"]])]))
+  {}
   {:inspect-data true})

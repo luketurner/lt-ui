@@ -10,14 +10,15 @@
      [(s/> :.input-group :*) {:margin-left 0 :margin-right 0}]
      [((s/> :.input-group :*) (s/not s/last-child)) {:border-right 0}]]))
 
-(defn group [opts & children]
-  (into [:div.input-group] (map #(update % 1 merge opts) children)))
+(defn group [props & children]
+  (into [:div.input-group] (map #(update % 1 merge props) children)))
 
-(defn input [{:keys [type options value on-change validator on-error show-error] :as opts
+(defn input [{:keys [type options value on-change validator on-error show-error]
               :or {validator #(identity true)
                    show-error #(str "Invalid value.")
                    on-error #(identity true)
-                   on-change #(identity true)}}]
+                   on-change #(identity true)}
+              :as props}]
 
   ;; initialize atoms for managing state. Maintains two versions of the value:
   ;;   internal-value-atom :: contains the current raw input (which may not be valid.)
@@ -46,45 +47,48 @@
                          (do
                            (reset! internal-value-atom v)
                            (on-error (show-error v)))))
-          opts (-> opts
+          props (-> props
                    (merge {:on-change on-change
                            :value internal-value
                            :class (str (when-not value-is-valid? "invalid-input"))})
-                   (dissoc :validator :on-error :show-error))]
+                   (dissoc :validator
+                           :on-error
+                           :show-error
+                           :options))]
       (case type
-        :textarea [:textarea opts]
-        :select (into [:select opts] (for [o options]
+        :textarea [:textarea props]
+        :select (into [:select props] (for [o options]
                                        [:option {:value (:value o)} (:label o)]))
-        [:input opts]))))
+        [:input props]))))
 
 ;; Functions for all the <input> types
-(defn checkbox [opts] [input (assoc opts :type :checkbox)])
-(defn color [opts] [input (assoc opts :type :color)])
-(defn date [opts] [input (assoc opts :type :date)])
-(defn datetime-local [opts] [input (assoc opts :type :datetime-local)])
-(defn email [opts] [input (assoc opts :type :email)])
-(defn file [opts] [input (assoc opts :type :file)])
-(defn month [opts] [input (assoc opts :type :month)])
-(defn integer [opts] [input (assoc opts :type :number)])
-(defn number [opts] [input (assoc opts :type :number)])
-(defn password [opts] [input (assoc opts :type :password)])
-(defn radio [opts] [input (assoc opts :type :radio)]) ; TODO
-(defn numeric-range [opts] [input (assoc opts :type :range)])
-(defn search [opts] [input (assoc opts :type :search)]) ; TODO?
-(defn tel [opts] [input (assoc opts :type :tel)])
-(defn text [opts] [input (assoc opts :type :text)])
-(defn time [opts] [input (assoc opts :type :time)])
-(defn url [opts] [input (assoc opts :type :url)])
-(defn week [opts] [input (assoc opts :type :week)])
+(defn checkbox [props] [input (assoc props :type :checkbox)])
+(defn color [props] [input (assoc props :type :color)])
+(defn date [props] [input (assoc props :type :date)])
+(defn datetime-local [props] [input (assoc props :type :datetime-local)])
+(defn email [props] [input (assoc props :type :email)])
+(defn file [props] [input (assoc props :type :file)])
+(defn month [props] [input (assoc props :type :month)])
+(defn integer [props] [input (assoc props :type :number)])
+(defn number [props] [input (assoc props :type :number)])
+(defn password [props] [input (assoc props :type :password)])
+(defn radio [props] [input (assoc props :type :radio)]) ; TODO
+(defn numeric-range [props] [input (assoc props :type :range)])
+(defn search [props] [input (assoc props :type :search)]) ; TODO?
+(defn tel [props] [input (assoc props :type :tel)])
+(defn text [props] [input (assoc props :type :text)])
+(defn time [props] [input (assoc props :type :time)])
+(defn url [props] [input (assoc props :type :url)])
+(defn week [props] [input (assoc props :type :week)])
 
 ;; functions for custom input types
-(defn select [opts] [input (assoc opts :type :select)])
-(defn textarea [opts] [input (assoc opts :type :textarea)])
+(defn select [props] [input (assoc props :type :select)])
+(defn textarea [props] [input (assoc props :type :textarea)])
 
 
 (defn cursor
   ([data on-change path] (cursor data on-change path {}))
-  ([data on-change path opts]
-   (merge opts
+  ([data on-change path props]
+   (merge props
           {:value (get-in data path)
            :on-change #(on-change (assoc-in data path %))})))

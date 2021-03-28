@@ -9,7 +9,7 @@
                      :width "100%"
                      :padding (px m-px)
                      :display "grid"
-                     :grid-template-rows "25px 1fr 25px"
+                     :grid-template-rows "fit-content(5ch) 1fr fit-content(5ch)"
                      :grid-template-columns "fit-content(20ch) minmax(min(50vw, 30ch), 1fr) fit-content(20ch)"
                      :grid-template-areas "\"header header header\" \"left   main   right\" \"footer footer footer\""
                      :gap (px m-px)

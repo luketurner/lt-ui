@@ -64,6 +64,7 @@
 (defn email [opts] [input (assoc opts :type :email)])
 (defn file [opts] [input (assoc opts :type :file)])
 (defn month [opts] [input (assoc opts :type :month)])
+(defn integer [opts] [input (assoc opts :type :number)])
 (defn number [opts] [input (assoc opts :type :number)])
 (defn password [opts] [input (assoc opts :type :password)])
 (defn radio [opts] [input (assoc opts :type :radio)]) ; TODO

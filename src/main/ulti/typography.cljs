@@ -31,6 +31,8 @@
      [:sub :sup {:line-height 0 :position :relative :vertical-align :baseline}]
      [:sup {:top (em -0.5)}]
      [:sub {:bottom (em -0.25)}]
+     [:dt {:font-weight :bold}]
+     [:dd {:margin-left 0 :margin-bottom (px lh-px)}]
      [:.utility-show-rows {:display :block
                            :position :absolute
                            :left (px 0)

@@ -16,7 +16,8 @@
 (defn input [{:keys [type options value on-change validator on-error show-error] :as opts
               :or {validator #(identity true)
                    show-error #(str "Invalid value.")
-                   on-error #(identity true)}}]
+                   on-error #(identity true)
+                   on-change #(identity true)}}]
 
   ;; initialize atoms for managing state. Maintains two versions of the value:
   ;;   internal-value-atom :: contains the current raw input (which may not be valid.)
@@ -51,7 +52,7 @@
                            :class (str (when-not value-is-valid? "invalid-input"))})
                    (dissoc :validator :on-error :show-error))]
       (case type
-        :textarea [:textarea opts internal-value]
+        :textarea [:textarea opts]
         :select (into [:select opts] (for [o options]
                                        [:option {:value (:value o)} (:label o)]))
         [:input opts]))))

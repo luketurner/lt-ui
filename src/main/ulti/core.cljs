@@ -4,6 +4,7 @@
             [malli.core :refer [validate explain]]
             [ulti.typography :as typography]
             [ulti.containers :as containers]
+            [ulti.icons :as icons]
             [ulti.inputs :as inputs]
             [ulti.forms :as forms]))
 
@@ -40,9 +41,9 @@
     (concat [[:* {:box-sizing :border-box}]]
             (typography/rules theme)
             (containers/rules theme)
+            (icons/css-rules theme)
             (inputs/css-rules theme)
             (forms/css-rules theme))))
 
 (defn themed-stylesheet [theme]
   [:style (css (theme-rules theme))])
-

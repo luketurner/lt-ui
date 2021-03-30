@@ -19,8 +19,7 @@
    indicated below:"
   default-theme)
 
-(defcard' default-theme
-  "The default theme looks like this:"
+(def theme-demo-view
   [containers/application
    {:header [containers/paper
              [:strong "Heading"]]
@@ -61,3 +60,50 @@
     [forms/group
      {:label "Textarea"
       :inputs [[inputs/textarea {:value "Text!"}]]}]]])
+
+(defcard
+  "# Example Themes
+   
+   Note -- because CSS rules aren't scoped per-card, all the example themes in this page will
+   look the same. You have to **click on the card title** to open _just_ that card in order to see
+   that card's specific theme.")
+
+(defcard' default-theme
+  "The default theme looks like this:"
+  theme-demo-view)
+
+(def solarized
+  {:base03 "#002b36"
+   :base02 "#073642"
+   :base01 "#586e75"
+   :base00 "#657b83"
+   :base0 "#839496"
+   :base1 "#93a1a1"
+   :base2 "#eee8d5"
+   :base3 "#fdf6e3"
+   :yellow "#b58900"
+   :orange "#cb4b16"
+   :red "#dc322f"
+   :magenta "#d33682"
+   :violet "#6c71c4"
+   :blue "#268bd2"
+   :cyan "#2aa198"
+   :green "#859900"})
+
+(defcard' solarized-dark-theme
+  "An example of a theme based on Solarized (Dark mode)"
+  theme-demo-view
+  nil
+  {:theme {:colors {:content-fg (:base0 solarized)
+                    :content-bg (:base03 solarized)
+                    :chrome-fg (:base0 solarized)
+                    :chrome-bg (:base03 solarized)}}})
+
+(defcard' solarized-light-theme
+  "An example of a theme based on Solarized (Light mode)"
+  theme-demo-view
+  nil
+  {:theme {:colors {:content-fg (:base00 solarized)
+                    :content-bg (:base3 solarized)
+                    :chrome-fg (:base00 solarized)
+                    :chrome-bg (:base3 solarized)}}})

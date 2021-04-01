@@ -203,8 +203,9 @@
   {:value nil :error nil}
   {:inspect-data true})
 
-(defcard' select-input
-  "An example of a `select`:"
+(defcard' select
+  "A `select` component can be used to wrap the native HTML `<select>`. Options are specified
+   using the `:options` prop, instead of as child elements."
   (fn [data-atom]
     (let [data @data-atom
           on-change (fn [data] (reset! data-atom data))]
@@ -212,6 +213,20 @@
                       :on-change on-change
                       :options [{:value "foo" :label "Foo label"}
                                 {:value "bar" :label "Bar label"}]}]))
+  nil
+  {:inspect-data true})
+
+(defcard' combobox
+  "A `combobox` input acts like a `text` input, but it also pops up a dropdown like a `select` input
+   which the user can use for autocomplete. Generally preferred over `select` for keyboard-driven
+   forms."
+  (fn [data-atom]
+    (let [data @data-atom
+          on-change (fn [data] (reset! data-atom data))]
+      [inputs/combobox {:value data
+                        :on-change on-change
+                        :options [{:value "foo" :label "Foo label"}
+                                  {:value "bar" :label "Bar label"}]}]))
   nil
   {:inspect-data true})
 

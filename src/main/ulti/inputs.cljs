@@ -1,17 +1,45 @@
 (ns ulti.inputs
   (:require [reagent.core :as reagent]
             [garden.units :refer [px]]
-            [garden.selectors :as s])
+            [garden.selectors :as s]
+            [ulti.containers :as containers]
+            [clojure.string :as string])
   (:refer-clojure :exclude [time]))
 
 (defn css-rules [{:keys [line-height font-size]}]
   (let [m-px (-> line-height (* font-size) (js/Math.floor))]
     [[:.invalid-input {:border-color "red"}]
      [(s/> :.input-group :*) {:margin-left 0 :margin-right 0}]
-     [((s/> :.input-group :*) (s/not s/last-child)) {:border-right 0}]]))
+     [((s/> :.input-group :*) (s/not s/last-child)) {:border-right 0}]
+     [:.combobox-item {:padding "2px" :cursor :pointer}]]))
 
 (defn group [props & children]
   (into [:div.input-group] (map #(update % 1 merge props) children)))
+
+
+(defn combobox-impl [{:keys [options value on-change]}]
+  (reagent/with-let [expanded? (reagent/atom nil)]
+    (let [is-match? (fn [{v :value l :label}]
+                      (and
+                       (string? value)
+                       (not= value v)
+                       (or
+                        (string/includes? (string/lower-case l) (string/lower-case value))
+                        (string/includes? v value))))
+          matching-options (filter is-match? options)]
+     [:div.combobox {:on-focus #(reset! expanded? true)
+                     :on-blur #(reset! expanded? false)}
+     [:input {:type :text
+              :value value
+              :on-change #(-> % (.-target) (.-value) (on-change))}]
+     [containers/popover {:value (and @expanded? (seq matching-options))}
+      (into
+       [containers/paper]
+       (for [{v :value label :label} matching-options]
+         [:div.combobox-item {:tabindex 0
+                              :on-click #(do (reset! expanded? false)
+                                             (on-change v))}
+          label]))]])))
 
 (defn input [{:keys [type options value on-change validator on-error show-error]
               :or {validator #(identity true)
@@ -37,29 +65,29 @@
     ;; now that side effects are done, proceed with building the Reagent component
     (let [internal-value @internal-value-atom
           value-is-valid? (or (nil? internal-value) (validator internal-value))
-          on-change #(let [v (-> % (.-target) (.-value))]
-                       (if (validator v)
-                         (do
-                           (reset! internal-value-atom v)
-                           (reset! external-value-atom v)
-                           (on-change v)
-                           (on-error nil))
-                         (do
-                           (reset! internal-value-atom v)
-                           (on-error (show-error v)))))
-          props (-> props
-                   (merge {:on-change on-change
-                           :value internal-value
-                           :class (str (when-not value-is-valid? "invalid-input"))})
-                   (dissoc :validator
-                           :on-error
-                           :show-error
-                           :options))]
+          on-change #(if (validator %)
+                       (do
+                         (reset! internal-value-atom %)
+                         (reset! external-value-atom %)
+                         (on-change %)
+                         (on-error nil))
+                       (do
+                         (reset! internal-value-atom %)
+                         (on-error (show-error %))))
+          on-change-el #(-> % (.-target) (.-value) (on-change))
+          props (merge props {:on-change on-change
+                              :value internal-value
+                              :class (str (when-not value-is-valid? "invalid-input"))})
+          props-el (-> props
+                       (assoc :on-change on-change-el)
+                       (dissoc :validator :on-error :show-error))]
       (case type
-        :textarea [:textarea props]
-        :select (into [:select props] (for [o options]
+        :textarea [:textarea props-el]
+        :select (into [:select props-el] (for [o options]
                                        [:option {:value (:value o)} (:label o)]))
-        [:input props]))))
+        :combobox [combobox-impl props]
+        [:input props-el]))))
+
 
 ;; Functions for all the <input> types
 (defn checkbox [props] [input (assoc props :type :checkbox)])
@@ -83,6 +111,7 @@
 
 ;; functions for custom input types
 (defn select [props] [input (assoc props :type :select)])
+(defn combobox [props] [input (assoc props :type :combobox)])
 (defn textarea [props] [input (assoc props :type :textarea)])
 
 

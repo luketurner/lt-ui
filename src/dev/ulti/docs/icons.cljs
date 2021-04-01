@@ -3,25 +3,46 @@
             [devcards.core :refer [defcard]]
             [ulti.icons :as icons]))
 
-(defcard' icon-svg-provider
-  "In `ulti`, icons are included as SVG elements.
-   Instead of having the icon's SVG (which could be quite large) repeated for each element
-   on the page, the icon's SVG is encapsulated in a `<symbol>` and referenced within each icon
-   component by `<use>`.
+(defcard
+  "# Icons
+   
+   Ulti provides a flexible icon framework that's BYOI (Bring Your Own Icons).
+   This means there are no icons packaged with the framework; you need to provide
+   the icons yourself (as a static asset, or embedded in the page).
+   
+   Your icons must be provided in the form of SVG `<symbol>` declarations. For example,
+   if you want to use the `search` icon, you have to define:
+  
+   ```
+   <symbol id=\"search\">
+     <!-- my SVG stuff here -->
+   </symbol>
+   ```
 
-   This means that the SVG for each symbol is only included once. It also means that somewhere on the page, you need to include an SVG block to *define*
-   the symbols we want to use.
+   Within the `icon` component, an SVG `<use>` element pulls in the requested icon from
+   where the symbol is defined.
+
+   The reason Ulti doesn't package icons directly is there's no convenient way (I can see)
+   for a library consumer to expose a library's static assets when their project is compiled.
+   Eventually, I'd like to include a selection of item packs that are either preinstalled or
+   can be installed automatically.
+
+   Currently the only icon pack that's tested (in these docs) is
+   https://github.com/tabler/tabler-icons.
    
-   For Ulti, this can be done with the `icon-svg-provider` component. This component simply has
-   to be rendered somewhere in your DOM, and then the `icon` component will work!
+   Assuming you have a `/public/static/tabler-sprite.svg` file in your project:
+
+   ``` clojure
+   (set-default-spritesheet! \"static/tabler-sprite.svg\")
+   (set-default-icon-prefix! \"tabler-\")
+   ```
    
-   (This example actually renders an `icon-svg-provider`, but because it's invisible, there's nothing to see!)"
-  [icons/icon-svg-provider])
+   Then, you can freely use the `icon` component in your app.")
 
 (defcard' icon
   "The icon component! Pass an `:icon` prop with a keyword argument that specifies the name of the icon you wanna use -- in this case, `:search`."
   [icons/icon {:icon :search}])
 
-(defcard
-  "The following icons are available by default:"
-  (keys (:svg icons/default-icons)))
+;; (defcard
+;;   "The following icons are available by default:"
+;;   (keys (:svg icons/default-icons)))

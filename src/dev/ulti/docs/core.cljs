@@ -6,8 +6,11 @@
             [ulti.docs.inputs]
             [ulti.docs.getting-started]
             [ulti.docs.themes]
-            [ulti.docs.typography]))
+            [ulti.docs.typography]
+            [ulti.icons :refer [set-default-spritesheet! set-default-icon-prefix!]]))
 
 (defn init! []
+  (set-default-spritesheet! "static/tabler-sprite.svg")
+  (set-default-icon-prefix! "tabler-")
   (devcards/init!))
 

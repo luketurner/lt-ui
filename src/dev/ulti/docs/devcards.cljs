@@ -1,8 +1,7 @@
 (ns ulti.docs.devcards
   (:require [devcards.core :refer [start-devcard-ui! reagent]]
             [reagent.core :as r]
-            [ulti.core :refer [themed-stylesheet]]
-            [ulti.icons :refer [icon-svg-provider]]))
+            [ulti.core :refer [themed-stylesheet]]))
 
 (def docs-theme (r/atom {}))
 
@@ -14,7 +13,6 @@
    (fn [data-atom owner]
      [:<>
       [themed-stylesheet theme]
-      [icon-svg-provider]
       (if (fn? el-or-fn)
         (el-or-fn data-atom owner)
         el-or-fn)]))))

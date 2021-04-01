@@ -34,7 +34,7 @@
                :padding (px m-px)
                :border-radius "5px"}
       [(s/> (s/last-child)) {:margin-bottom "0px"}]]
-     [:.popover-container {:position :relative}]
+     [:.popover-container {:position :relative :z-index 1000}]
      [:.popover-handle {:cursor :pointer}]
      [:.popover-content {:position :absolute}]
      [:.utility-application-demo {:min-height (px 300)}]

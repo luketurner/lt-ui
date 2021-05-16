@@ -9,10 +9,10 @@
     "docs:build": "shadow-cljs release docs"
   },
   "devDependencies": {
-    "shadow-cljs": "2.11.23",
-    "marked": "^0.7.0",
     "highlight.js": "^10.6.0",
-    "react": "16.13.0"
+    "marked": "^0.7.0",
+    "react": "16.13.0",
+    "shadow-cljs": "2.11.23"
   },
   "dependencies": {
     "create-react-class": "15.6.3",

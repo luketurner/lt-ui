@@ -3,7 +3,7 @@
             [garden.units :refer [vh vw rem px]]
             [reagent.core :as reagent]))
 
-(defn rules [{:keys [line-height font-size colors]}]
+(defn css-rules [{:keys [line-height font-size colors]}]
   (let [m-px (-> line-height (* font-size) (js/Math.floor))]
     [[:.application {:min-height (vh 100)
                      :width "100%"

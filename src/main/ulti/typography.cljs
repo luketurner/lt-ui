@@ -2,7 +2,7 @@
   (:require [garden.units :refer [rem px percent em]]
             [garden.selectors :refer [descendant]]))
 
-(defn rules
+(defn css-rules
   "Defines rules for typography. They boil down to:
    
    1. Set the base font size to :font-size.

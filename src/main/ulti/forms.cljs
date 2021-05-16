@@ -2,7 +2,7 @@
   (:require [reagent.core :as reagent]
             [garden.units :refer [px]]))
 
-(defn css-rules [{:keys [line-height font-size colors]}]
+(defn css-rules [{:keys [line-height font-size]}]
   (let [m-px (-> line-height (* font-size) (js/Math.floor))]
     [[:.form-group {:display :grid
                      :margin (px m-px)

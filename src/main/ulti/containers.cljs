@@ -3,7 +3,7 @@
             [garden.units :refer [vh vw rem px]]
             [reagent.core :as reagent]))
 
-(defn css-rules [{:keys [line-height font-size colors]}]
+(defn css-rules [{:keys [line-height font-size color]}]
   (let [m-px (-> line-height (* font-size) (js/Math.floor))]
     [[:.application {:min-height (vh 100)
                      :width "100%"
@@ -13,21 +13,22 @@
                      :grid-template-columns "fit-content(20ch) minmax(min(50vw, 30ch), 1fr) fit-content(20ch)"
                      :grid-template-areas "\"header header header\" \"left   main   right\" \"footer footer footer\""
                      :gap (px m-px)
-                     :color (:chrome-fg colors)
-                     :background-color (:chrome-bg colors)}
+                     :color (get-in color [:chrome :fg])
+                     :background-color (get-in color [:chrome :bg])}
       [(s/> :.sidebar-left) {:grid-area :left}]
       [(s/> :.sidebar-right) {:grid-area :right}]
       [(s/> :footer) {:grid-area :footer}]
       [(s/> :header) {:grid-area :header}]
       [(s/> :main) {:grid-area :main
-                    :color (:content-fg colors)
-                    :background-color (:content-bg colors)}]]
+                    :color (get-in color [:content :fg])
+                    :background-color (get-in color [:content :bg])}]]
      [:.centered {:display :grid :place-content :center}]
      [:.vertical-split {:display :flex :flex-flow "row nowrap"}
       [(s/> :*) {:flex-grow 1}]]
      [:.horizontal-split {:display :flex :flex-flow "column nowrap"}
       [(s/> :*) {:flex-grow 1}]]
-     [:.paper {:background-color (:chrome-bg colors)
+     [:.paper {:background-color (get-in color [:chrome :bg])
+               :color (get-in color [:chrome :bg])
                :box-shadow ["0px 2px 1px -1px rgba(0, 0, 0, 0.2)" ; based on md box shadow
                             "0px 1px 1px 0px rgba(0, 0, 0, 0.14)"
                             "0px 1px 3px 0px rgba(0,0,0,.12)"]

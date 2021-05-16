@@ -94,16 +94,12 @@
   "An example of a theme based on Solarized (Dark mode)"
   theme-demo-view
   nil
-  {:theme {:colors {:content-fg (:base0 solarized)
-                    :content-bg (:base03 solarized)
-                    :chrome-fg (:base0 solarized)
-                    :chrome-bg (:base03 solarized)}}})
+  {:theme {:colors {:content {:fg (:base0 solarized) :bg (:base03 solarized)}
+                    :chrome {:fg (:base0 solarized) :bg (:base03 solarized)}}}})
 
 (defcard' solarized-light-theme
   "An example of a theme based on Solarized (Light mode)"
   theme-demo-view
   nil
-  {:theme {:colors {:content-fg (:base00 solarized)
-                    :content-bg (:base3 solarized)
-                    :chrome-fg (:base00 solarized)
-                    :chrome-bg (:base3 solarized)}}})
+  {:theme {:colors {:content {:fg (:base00 solarized) :bg (:base3 solarized)}
+                    :chrome {:fg (:base00 solarized) :bg (:base3 solarized)}}}})

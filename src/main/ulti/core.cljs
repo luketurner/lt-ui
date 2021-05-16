@@ -15,20 +15,22 @@
    [:font-size 'int?
     :line-height 'number?
     :scale-factor 'number?
-    :colors [:map {:registry {::color [:alt 'string? 'keyword?]}}
-             [:content-fg ::color]
-             [:content-bg ::color]
-             [:chrome-fg ::color]
-             [:chrome-bg ::color]]]])
+    :color [:map {:registry {::color [:alt 'string? 'keyword?]
+                              ::theme [:map
+                                       [:fg ::color]
+                                       [:bg ::color]]}}
+             [:content ::theme]
+             [:chrome ::theme]]]])
 
 (def default-theme
   {:font-size 16
    :line-height 1.5
    :scale-factor 1.4
-   :colors {:content-fg :black
-            :content-bg :white
-            :chrome-fg :black
-            :chrome-bg :white}})
+   :color
+   {:content {:fg :black
+              :bg :wnite}
+    :chrome  {:fg :black
+              :bg :white}}})
 
 (defn add-default-values [theme]
   (merge-with (fn [dv v]

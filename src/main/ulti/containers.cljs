@@ -1,7 +1,8 @@
 (ns ulti.containers
   (:require [garden.selectors :as s]
             [garden.units :refer [vh vw rem px]]
-            [reagent.core :as reagent]))
+            [reagent.core :as reagent]
+            [ulti.util :refer-macros [defcomponent]]))
 
 (defn css-rules [{:keys [line-height font-size color]}]
   (let [m-px (-> line-height (* font-size) (js/Math.floor))]
@@ -41,39 +42,34 @@
      [:.utility-application-demo {:min-height (px 300)}]
      [:.utility-fill-color {:background-color "rgba(150, 200, 255, 0.5)" :width "100%" :height "100%"}]]))
 
-(defn application [props & children]
-  (let [props? (map? props)
-        children (if props? children (into [props] children))
-        props (if props? props {})
-        {:keys [sidebar-left sidebar-right header footer]} props
-        props (dissoc props :sidebar-left :sidebar-right :header :footer)]
-    [:div.application props ; TODO -- filter props
-     [:header header]
-     [:div.sidebar-left sidebar-left]
-     (into [:main] children)
-     [:div.sidebar-right sidebar-right]
-     [:footer footer]]))
+(defcomponent application [{:keys [sidebar-left sidebar-right header footer children props]}]
+  [:div.application props
+   [:header header]
+   [:div.sidebar-left sidebar-left]
+   (into [:main] children)
+   [:div.sidebar-right sidebar-right]
+   [:footer footer]])
 
-(defn router [{:keys [views value]}]
+(defcomponent router [{:keys [views value]}]
   (get views value))
 
-(defn centered [& children]
-  (into [:div.centered] children))
+(defcomponent centered [{:keys [children props]}]
+  (into [:div.centered props] children))
 
-(defn vertical-split [& children]
-  (into [:div.vertical-split] children))
+(defcomponent vertical-split [{:keys [children props]}]
+  (into [:div.vertical-split props] children))
 
-(defn horizontal-split [& children]
-  (into [:div.horizontal-split] children))
+(defcomponent horizontal-split [{:keys [children props]}]
+  (into [:div.horizontal-split props] children))
 
-(defn paper [& children]
-  (into [:div.paper] children))
+(defcomponent paper [{:keys [children props]}]
+  (into [:div.paper props] children))
 
-(defn popover [{:keys [handle value on-change]} & children]
+(defcomponent popover [{:keys [handle value on-change children props]}]
   (reagent/with-let [open? (reagent/atom false)
                      last-value (reagent/atom false)]
     (when (not= value @last-value) (reset! open? value) (reset! last-value value))
-    [:span.popover-container
+    [:span.popover-container props
      [:span.popover-handle {:on-click #(do 
                                         (swap! open? not)
                                         (when (fn? on-change) (on-change @open?)))}

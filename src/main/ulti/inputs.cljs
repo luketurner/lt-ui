@@ -3,7 +3,8 @@
             [garden.units :refer [px]]
             [garden.selectors :as s]
             [ulti.containers :as containers]
-            [clojure.string :as string])
+            [clojure.string :as string]
+            [ulti.util :refer-macros [defcomponent]])
   (:refer-clojure :exclude [time]))
 
 (defn css-rules [{:keys [line-height font-size]}]
@@ -13,7 +14,7 @@
      [((s/> :.input-group :*) (s/not s/last-child)) {:border-right 0}]
      [:.combobox-item {:padding "2px" :cursor :pointer}]]))
 
-(defn group [props & children]
+(defcomponent group [props children]
   (into [:div.input-group] (map #(update % 1 merge props) children)))
 
 

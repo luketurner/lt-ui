@@ -1,6 +1,7 @@
 (ns ulti.forms
   (:require [reagent.core :as reagent]
-            [garden.units :refer [px]]))
+            [garden.units :refer [px]]
+            [ulti.util :refer-macros [defcomponent]]))
 
 (defn css-rules [{:keys [line-height font-size]}]
   (let [m-px (-> line-height (* font-size) (js/Math.floor))]
@@ -12,7 +13,7 @@
       [:.form-group-input {:grid-column "2"}]]]))
 
 
-(defn group [{:keys [inputs label]}]
+(defcomponent group [{:keys [inputs label]}]
   (reagent/with-let [error-message (reagent/atom nil)]
     (let [update-input (fn [x] [:div.form-group-input
                                 (assoc-in x [1 :on-error] #(reset! error-message %))])

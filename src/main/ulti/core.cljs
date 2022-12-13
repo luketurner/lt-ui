@@ -15,10 +15,10 @@
    [:font-size 'int?
     :line-height 'number?
     :scale-factor 'number?
-    :color [:map {:registry {::color [:alt 'string? 'keyword?]
-                              ::theme [:map
-                                       [:fg ::color]
-                                       [:bg ::color]]}}
+    :color [:map {:registry {::color 'string?
+                             ::theme [:map
+                                      [:fg ::color]
+                                      [:bg ::color]]}}
              [:content ::theme]
              [:chrome ::theme]]]])
 
